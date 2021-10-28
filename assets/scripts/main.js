@@ -43,6 +43,15 @@ async function fetchRecipes() {
     // in the recipes folder and fetch them from there. You'll need to add their paths to the recipes array.
 
     // Part 1 Expose - TODO
+    for (let i = 0; i < recipes.length; i++) {
+      fetch(recipes[i])
+        .catch(error => {
+          reject(false);
+        })
+        .then(response => recipeData[recipes[i]] = response.json())
+        resolve(true);
+    }
+    console.log(recipeData);
   });
 }
 
@@ -54,6 +63,11 @@ function createRecipeCards() {
   // show any others you've added when the user clicks on the "Show more" button.
 
   // Part 1 Expose - TODO
+  for (let i = 0; i < recipeData.length; i++) {
+    const recipeCard = document.createElement('recipe-card');
+    recipeCard.data = recipeData[i];
+    card.appendChild(recipeCard);
+  }
 }
 
 function bindShowMore() {

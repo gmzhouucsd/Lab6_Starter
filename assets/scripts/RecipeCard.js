@@ -100,6 +100,7 @@ class RecipeCard extends HTMLElement {
     // created in the constructor()
 
     // Part 1 Expose - TODO
+    
   }
 }
 
