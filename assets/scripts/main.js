@@ -45,13 +45,13 @@ async function fetchRecipes() {
     // Part 1 Expose - TODO
     for (let i = 0; i < recipes.length; i++) {
       fetch(recipes[i])
-        .catch(error => {
+        .then(response => recipeData[i] = response.json())
+        .catch(error => reject(false))
+        if (recipeData.length != recipes.length) {
           reject(false);
-        })
-        .then(response => recipeData[recipes[i]] = response.json())
+        }
         resolve(true);
     }
-    console.log(recipeData);
   });
 }
 
