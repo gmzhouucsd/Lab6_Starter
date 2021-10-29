@@ -101,7 +101,14 @@ class RecipeCard extends HTMLElement {
     // created in the constructor()
 
     // Part 1 Expose - TODO
+    const picture = document.querySelector('img');
+    const link = document.querySelector('.title');
+    const rating = document.querySelector('.rating');
+    const duration = document.querySelector('time');
+    const ingredients = document.querySelector('.ingredients')
+
     
+
     shadowRoot.appendChild(card);
     shadowRoot.appendChild(styleElem);
   }
