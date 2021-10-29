@@ -1,7 +1,7 @@
 class RecipeCard extends HTMLElement {
   constructor() {
     // Part 1 Expose - TODO
-
+    const shadowRoot = this.attachShadow()
     // You'll want to attach the shadow DOM here
   }
 
@@ -100,7 +100,6 @@ class RecipeCard extends HTMLElement {
     // created in the constructor()
 
     // Part 1 Expose - TODO
-    
   }
 }
 
