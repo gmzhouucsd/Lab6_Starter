@@ -69,7 +69,7 @@ function createRecipeCards() {
   for (let recipe in recipeData) {
     const recipeCard = document.createElement('recipe-card');
     recipeCard.data = recipe;
-    card.appendChild(recipeCard);
+    main.appendChild(recipeCard);
   }
 }
 
