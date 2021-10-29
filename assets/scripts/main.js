@@ -19,7 +19,6 @@ window.addEventListener('DOMContentLoaded', init);
 async function init() {
   // fetch the recipes and wait for them to load
   let fetchSuccessful = await fetchRecipes();
-  console.log(fetchSuccessful)
   // if they didn't successfully load, quit the function
   if (!fetchSuccessful) {
     console.log('Recipe fetch unsuccessful');
@@ -52,7 +51,6 @@ async function fetchRecipes() {
         .then(response => recipeData[i] = response.json());
       recipeDataSize++;
     }
-    console.log(recipeDataSize)
     if (recipeDataSize != recipes.length) {
       reject(false);
     }
@@ -68,9 +66,9 @@ function createRecipeCards() {
   // show any others you've added when the user clicks on the "Show more" button.
 
   // Part 1 Expose - TODO
-  for (let i = 0; i < recipeData.length; i++) {
+  for (let recipe in recipeData) {
     const recipeCard = document.createElement('recipe-card');
-    recipeCard.data = recipeData[i];
+    recipeCard.data = recipe;
     card.appendChild(recipeCard);
   }
 }
