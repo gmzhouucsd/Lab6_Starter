@@ -2,7 +2,7 @@ class RecipeCard extends HTMLElement {
   constructor() {
     // Part 1 Expose - TODO
     super();
-    let shadowRoot = this.attachShadow({mode: 'open'});
+    this.shadow = this.attachShadow({mode: 'open'});
     // You'll want to attach the shadow DOM here
   }
 
@@ -101,21 +101,18 @@ class RecipeCard extends HTMLElement {
     // created in the constructor()
 
     // Part 1 Expose - TODO
-    var picture = document.querySelector('img');
-    var link = document.querySelector('.title');
-    var rating = document.querySelector('.rating');
-    var duration = document.querySelector('time');
-    var ingredients = document.querySelector('.ingredients')
+    let picture = document.createElement('img');
+    const src = searchForKey(data, 'thumbnailUrl');
+    picture.src = src;
+    card.appendChild(picture);
 
-    picture.src = searchForKey(data, 'thumbnail');
-    link.href = searchForKey(data, 'url');
-    searchForKey(data, 'name');
-    duration = searchForKey(data, 'totalTime');
-    searchForKey(data, 'recipeIngredient');
+    let title = document.createElement('p');
+    title = "abc";
+    card.appendChild(title);
+    // const link = searchForKey(data, );
 
-
-    shadowRoot.appendChild(card);
-    shadowRoot.appendChild(styleElem);
+    this.shadow.appendChild(card);
+    this.shadow.appendChild(styleElem);
   }
 }
 

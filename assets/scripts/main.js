@@ -47,15 +47,17 @@ async function fetchRecipes() {
     var recipeDataSize = 0;
     for (let i = 0; i < recipes.length; i++) {
       fetch(recipes[i])
-        .catch(error => reject(false))
-        .then(response => recipeData[i] = response.json());
-      recipeDataSize++;
+      .then(response => response.json())
+      .then(data => {
+        recipeData[recipes[i]] = data;
+        recipeDataSize++;
+        if (recipeDataSize === recipes.length) {
+          resolve(true);
+        }
+      })
+      .catch(error => reject(false));
     }
-    if (recipeDataSize != recipes.length) {
-      reject(false);
-    }
-    resolve(true);
-  });
+  })
 }
 
 function createRecipeCards() {
@@ -66,9 +68,10 @@ function createRecipeCards() {
   // show any others you've added when the user clicks on the "Show more" button.
 
   // Part 1 Expose - TODO
+  const main = document.querySelector('main');
   for (let recipe in recipeData) {
     const recipeCard = document.createElement('recipe-card');
-    recipeCard.data = recipe;
+    recipeCard.data = recipeData[recipe];
     main.appendChild(recipeCard);
   }
 }
