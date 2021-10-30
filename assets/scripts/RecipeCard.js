@@ -106,10 +106,45 @@ class RecipeCard extends HTMLElement {
     picture.src = src;
     card.appendChild(picture);
 
-    let title = document.createElement('p');
-    title = "abc";
+    let title = document.createElement('a');
+    const link = getUrl(data);
+    const name = searchForKey(data, 'headline');
+    title.innerHTML = name;
+    title.href = link;
     card.appendChild(title);
-    // const link = searchForKey(data, );
+
+    let org = document.createElement('p');
+    const orgName = getOrganization(data);
+    org.innerHTML = orgName;
+    card.appendChild(org);
+
+    const rate = searchForKey(data, 'aggregateRating');
+    if (rate != undefined) {
+      let rateNum = rate.ratingValue;
+      let rating = document.createElement('span');
+      rating = rateNum;
+      let ratePic = document.createElement('img');
+      ratePic.src = `/assets/images/icons/${Math.round(rateNum)}-star.svg`;
+      let rateAmount = document.createElement('span');
+      rateAmount = `(${rate.ratingCount})`;
+      card.append(rating);
+      card.append(ratePic);
+      card.append(rateAmount);
+    }
+    else {
+      let rating = document.createElement('span');
+      rating = "No Reviews";
+      card.append(rating);
+    }
+     
+    let time = document.createElement('time');
+    const totalTime = searchForKey(data, 'totalTime');
+    time = convertTime(totalTime);
+    card.append(time);
+
+    let ingredients = document.createElement('p');
+    const ingredientList = searchForKey(data, 'recipeIngredient');
+    card.append(createIngredientList(ingredientList));
 
     this.shadow.appendChild(card);
     this.shadow.appendChild(styleElem);
