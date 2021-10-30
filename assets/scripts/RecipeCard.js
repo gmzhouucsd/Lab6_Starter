@@ -109,45 +109,49 @@ class RecipeCard extends HTMLElement {
     let title = document.createElement('a');
     const link = getUrl(data);
     const name = searchForKey(data, 'headline');
-    title.innerHTML = name;
+    title.textContent = name;
     title.href = link;
     card.appendChild(title);
 
     let org = document.createElement('p');
     const orgName = getOrganization(data);
-    org.innerHTML = orgName;
+    org.textContent = orgName;
     card.appendChild(org);
 
+    let recipeMain = document.createElement('div');
     const rate = searchForKey(data, 'aggregateRating');
     if (rate != undefined) {
       let rateNum = rate.ratingValue;
       let rating = document.createElement('span');
-      rating = rateNum;
+      rating.innerHTML = rateNum;
       let ratePic = document.createElement('img');
       ratePic.src = `/assets/images/icons/${Math.round(rateNum)}-star.svg`;
       let rateAmount = document.createElement('span');
-      rateAmount = `(${rate.ratingCount})`;
-      card.append(rating);
-      card.append(ratePic);
-      card.append(rateAmount);
+      rateAmount.innerHTML = `(${rate.ratingCount})`;
+      recipeMain.append(rating);
+      recipeMain.append(ratePic);
+      recipeMain.append(rateAmount);
+      card.append(recipeMain);
     }
     else {
       let rating = document.createElement('span');
-      rating = "No Reviews";
-      card.append(rating);
+      rating.innerHTML = "No Reviews";
+      recipeMain.append(rating);
+      card.append(recipeMain);  
     }
      
     let time = document.createElement('time');
     const totalTime = searchForKey(data, 'totalTime');
-    time = convertTime(totalTime);
+    time.innerHTML = convertTime(totalTime);
     card.append(time);
 
     let ingredients = document.createElement('p');
     const ingredientList = searchForKey(data, 'recipeIngredient');
-    card.append(createIngredientList(ingredientList));
+    ingredients.innerHTML = createIngredientList(ingredientList);
+    card.append(ingredients);
 
-    this.shadow.appendChild(card);
     this.shadow.appendChild(styleElem);
+    this.shadow.appendChild(card);
   }
 }
 
