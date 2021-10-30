@@ -106,28 +106,36 @@ class RecipeCard extends HTMLElement {
     picture.src = src;
     card.appendChild(picture);
 
-    let title = document.createElement('a');
+    let title = document.createElement('p');
+    let linkName = document.createElement('a');
     const link = getUrl(data);
     const name = searchForKey(data, 'headline');
-    title.textContent = name;
-    title.href = link;
+    linkName.textContent = name;
+    linkName.href = link;
+    title.classList.add('title');
+    title.append(linkName);
     card.appendChild(title);
 
+    picture.alt = name;
+
     let org = document.createElement('p');
+    org.classList.add('organization');
     const orgName = getOrganization(data);
     org.textContent = orgName;
     card.appendChild(org);
 
     let recipeMain = document.createElement('div');
+    recipeMain.classList.add('rating');
     const rate = searchForKey(data, 'aggregateRating');
     if (rate != undefined) {
       let rateNum = rate.ratingValue;
       let rating = document.createElement('span');
-      rating.innerHTML = rateNum;
+      rating.textContent = rateNum;
       let ratePic = document.createElement('img');
       ratePic.src = `/assets/images/icons/${Math.round(rateNum)}-star.svg`;
+      ratePic.alt = `${Math.round(rate)} stars`;
       let rateAmount = document.createElement('span');
-      rateAmount.innerHTML = `(${rate.ratingCount})`;
+      rateAmount.textContent = `(${rate.ratingCount})`;
       recipeMain.append(rating);
       recipeMain.append(ratePic);
       recipeMain.append(rateAmount);
@@ -135,7 +143,7 @@ class RecipeCard extends HTMLElement {
     }
     else {
       let rating = document.createElement('span');
-      rating.innerHTML = "No Reviews";
+      rating.textContent = "No Reviews";
       recipeMain.append(rating);
       card.append(recipeMain);  
     }
@@ -146,6 +154,7 @@ class RecipeCard extends HTMLElement {
     card.append(time);
 
     let ingredients = document.createElement('p');
+    ingredients.classList.add('ingredients');
     const ingredientList = searchForKey(data, 'recipeIngredient');
     ingredients.innerHTML = createIngredientList(ingredientList);
     card.append(ingredients);
