@@ -132,8 +132,8 @@ class RecipeCard extends HTMLElement {
       let rating = document.createElement('span');
       rating.textContent = rateNum;
       let ratePic = document.createElement('img');
-      ratePic.src = `/assets/images/icons/${Math.round(rateNum)}-star.svg`;
-      ratePic.alt = `${Math.round(rate)} stars`;
+      ratePic.src = `assets/images/icons/${Math.round(rateNum)}-star.svg`;
+      ratePic.alt = `${Math.round(rateNum)} stars`;
       let rateAmount = document.createElement('span');
       rateAmount.textContent = `(${rate.ratingCount})`;
       recipeMain.append(rating);
