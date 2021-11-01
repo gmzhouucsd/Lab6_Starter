@@ -5,7 +5,10 @@
 const recipes = [
   'https://introweb.tech/assets/json/ghostCookies.json',
   'https://introweb.tech/assets/json/birthdayCake.json',
-  'https://introweb.tech/assets/json/chocolateChip.json'
+  'https://introweb.tech/assets/json/chocolateChip.json',
+  'assets/recipes/mein.json',
+  'assets/recipes/rice.json',
+  'assets/recipes/katsu.json'
 ];
 
 // Once all of the recipes that were specified above have been fetched, their
@@ -24,7 +27,6 @@ async function init() {
     console.log('Recipe fetch unsuccessful');
     return;
   };
-  console.log(recipeData)
   // Add the first three recipe cards to the page
   createRecipeCards();
   // Make the "Show more" button functional
@@ -69,9 +71,9 @@ function createRecipeCards() {
 
   // Part 1 Expose - TODO
   const main = document.querySelector('main');
-  for (let recipe in recipeData) {
+  for (let i = 0; i < 3; i++) {
     const recipeCard = document.createElement('recipe-card');
-    recipeCard.data = recipeData[recipe];
+    recipeCard.data = recipeData[recipes[i]];
     main.appendChild(recipeCard);
   }
 }
@@ -85,4 +87,33 @@ function bindShowMore() {
   // in the recipeData object where you stored them/
 
   // Part 2 Explore - TODO
+
+
+  // let fetchSuccessful = await fetchRecipes();
+  // // if they didn't successfully load, quit the function
+  // if (!fetchSuccessful) {
+  //   console.log('Recipe fetch unsuccessful');
+  //   return;
+  // };
+  const main = document.querySelector('main');
+  const size = Object.keys(recipeData).length;
+  const showMore = document.querySelector("button");
+  showMore.addEventListener("click", event => {
+    if (showMore.textContent == "Show more") {
+      showMore.textContent = "Show less";
+      for (let i = 3; i < size; i++){
+        const recipeCard = document.createElement('recipe-card');
+        recipeCard.data = recipeData[recipes[i]];
+        main.appendChild(recipeCard);
+      }
+    }
+    else {
+      showMore.textContent = "Show more";
+      for (let i = 3; i < size; i++) {
+        const recipeCard = document.createElement('recipe-card');
+        recipeCard.data = recipeData[recipes[i]];
+        main.removeChild(recipeCard);
+      }
+    }
+  });
 }
