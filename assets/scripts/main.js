@@ -8,7 +8,7 @@ const recipes = [
   'https://introweb.tech/assets/json/chocolateChip.json',
   'assets/recipes/mein.json',
   'assets/recipes/rice.json',
-  'assets/recipes/katsu.json'
+  'assets/recipes/data.json'
 ];
 
 // Once all of the recipes that were specified above have been fetched, their
