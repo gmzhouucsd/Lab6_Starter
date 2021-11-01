@@ -110,9 +110,8 @@ function bindShowMore() {
     else {
       showMore.textContent = "Show more";
       for (let i = 3; i < size; i++) {
-        const recipeCard = document.createElement('recipe-card');
-        recipeCard.data = recipeData[recipes[i]];
-        main.removeChild(recipeCard);
+        const recipeCard = document.querySelectorAll('recipe-card');
+        main.removeChild(recipeCard[3]);
       }
     }
   });
